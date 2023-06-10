@@ -1,15 +1,17 @@
 import React, { useContext, useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, InputGroup } from "react-bootstrap";
 import swal from "sweetalert";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../providers/AuthProvider";
 import SocialLogin from "../shared/SocialLogin";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/Ai";
 
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [loginError, setLoginError] = useState("");
+  const [show, setShow] = useState(false);
   // redirect location
   const redirectLocation = location?.state?.from?.pathname || "/";
   const { userLogin } = useContext(AuthContext);
@@ -65,16 +67,19 @@ const Login = () => {
                     <span className="text-danger">Email field is required</span>
                   )}
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                  <Form.Label>Password</Form.Label>
+                <Form.Label>Password</Form.Label>
+                <InputGroup className="mb-3" controlId="formBasicPassword">
                   <Form.Control
                     style={{ padding: "0.7rem" }}
-                    type="password"
+                    type={show ? "text" : "password"}
                     placeholder="Enter Password"
                     {...register("password", {
                       required: true,
                     })}
                   />
+                  <InputGroup.Text onClick={() => setShow(!show)}>
+                    {show ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                  </InputGroup.Text>
                   {errors.password && (
                     <span className="text-danger">
                       Password field is required
@@ -85,7 +90,7 @@ const Login = () => {
                   ) : (
                     ""
                   )}
-                </Form.Group>
+                </InputGroup>
                 <Button
                   className="w-100 fw-bold text-white"
                   variant="primary"

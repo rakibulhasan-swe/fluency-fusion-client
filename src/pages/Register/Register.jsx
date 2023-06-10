@@ -1,12 +1,15 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, InputGroup } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import swal from "sweetalert";
 import SocialLogin from "../shared/SocialLogin";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/Ai";
 
 const Register = () => {
+  const [show, setShow] = useState(false);
+  const [confirmShow, setConfirmShow] = useState(false);
   const navigate = useNavigate();
   const [passwordError, setPasswordError] = useState("");
   const { createUser, updateUser } = useContext(AuthContext);
@@ -113,49 +116,61 @@ const Register = () => {
                       </span>
                     )}
                   </Form.Group>
-                  <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
+                  <Form.Label>Password</Form.Label>
+                  <InputGroup className="mb-3" controlId="formBasicPassword">
                     <Form.Control
                       style={{ padding: "0.7rem" }}
-                      type="password"
+                      type={show ? "text" : "password"}
                       placeholder="Enter Password"
                       {...register("password", {
                         pattern: /^(?=.*?[A-Z])(?=.*?[#?!@$%^&*-]).{6,}$/,
                         required: true,
                       })}
                     />
-                    {errors.password && (
-                      <span className="text-danger">
-                        Please input at least one uppercase letter and a special
-                        characters.
-                      </span>
-                    )}
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
+                    <InputGroup.Text onClick={() => setShow(!show)}>
+                      {show ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                    </InputGroup.Text>
+                  </InputGroup>
+                  {errors.password && (
+                    <span className="text-danger d-block pb-3">
+                      Please input at least one uppercase letter and a special
+                      characters.
+                    </span>
+                  )}
+                  <Form.Label>Confirm Password</Form.Label>
+                  <InputGroup className="mb-3" controlId="formBasicPassword">
                     <Form.Control
                       style={{ padding: "0.7rem" }}
-                      type="password"
-                      placeholder="Enter Password"
+                      type={confirmShow ? "text" : "password"}
+                      placeholder="Enter Confirm Password"
                       {...register("confirmPassword", {
                         pattern: /^(?=.*?[A-Z])(?=.*?[#?!@$%^&*-]).{6,}$/,
                         required: true,
                       })}
                     />
-                    {errors.confirmPassword && (
-                      <span className="text-danger">
-                        Please input at least one uppercase letter and a special
-                        characters.
-                      </span>
-                    )}
+                    <InputGroup.Text
+                      onClick={() => setConfirmShow(!confirmShow)}
+                    >
+                      {confirmShow ? (
+                        <AiOutlineEye />
+                      ) : (
+                        <AiOutlineEyeInvisible />
+                      )}
+                    </InputGroup.Text>
                     {passwordError ? (
                       <span className="text-danger">{passwordError}</span>
                     ) : (
                       ""
                     )}
-                  </Form.Group>
+                  </InputGroup>
+                  {errors.confirmPassword && (
+                    <span className="text-danger">
+                      Please input at least one uppercase letter and a special
+                      characters.
+                    </span>
+                  )}
                   <Button
-                    className="w-100 fw-bold text-white"
+                    className="w-100 fw-bold text-white mt-3"
                     variant="primary"
                     type="submit"
                     style={{ padding: "0.7rem 0rem" }}
