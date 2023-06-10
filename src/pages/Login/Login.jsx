@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import swal from "sweetalert";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -9,6 +9,7 @@ import SocialLogin from "../shared/SocialLogin";
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [loginError, setLoginError] = useState("");
   // redirect location
   const redirectLocation = location?.state?.from?.pathname || "/";
   const { userLogin } = useContext(AuthContext);
@@ -20,6 +21,8 @@ const Login = () => {
   } = useForm();
   // user login
   const onSubmit = (data, e) => {
+    setLoginError("");
+    // user login
     userLogin(data.email, data.password)
       .then((res) => {
         const loggedUser = res.user;
@@ -31,9 +34,13 @@ const Login = () => {
           button: "Ok",
         });
         // navigate to home
-        navigate(redirectLocation || "/", { replace: true });
+        navigate(redirectLocation, { replace: true });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (err) {
+          setLoginError("Wrong Email or Password. Try again!");
+        }
+      });
     // reseting form values
     e.target.reset();
   };
@@ -65,15 +72,18 @@ const Login = () => {
                     type="password"
                     placeholder="Enter Password"
                     {...register("password", {
-                      pattern: /^(?=.*?[A-Z])(?=.*?[#?!@$%^&*-]).{6,}$/,
                       required: true,
                     })}
                   />
                   {errors.password && (
                     <span className="text-danger">
-                      Please input at least one uppercase letter and a special
-                      characters.
+                      Password field is required
                     </span>
+                  )}
+                  {loginError ? (
+                    <span className="text-danger">{loginError}</span>
+                  ) : (
+                    ""
                   )}
                 </Form.Group>
                 <Button

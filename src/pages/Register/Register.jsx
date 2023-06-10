@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ import SocialLogin from "../shared/SocialLogin";
 
 const Register = () => {
   const navigate = useNavigate();
+  const [passwordError, setPasswordError] = useState("");
   const { createUser, updateUser } = useContext(AuthContext);
   const {
     register,
@@ -16,6 +17,13 @@ const Register = () => {
   } = useForm();
   // creating user
   const onSubmit = (data, e) => {
+    // checking password matched or not
+    if (data.password !== data.confirmPassword) {
+      setPasswordError("Password didn't match");
+      return;
+    }
+    setPasswordError("");
+    // creating new user
     createUser(data.email, data.password)
       .then((result) => {
         // updating in ui
@@ -121,6 +129,29 @@ const Register = () => {
                         Please input at least one uppercase letter and a special
                         characters.
                       </span>
+                    )}
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                      style={{ padding: "0.7rem" }}
+                      type="password"
+                      placeholder="Enter Password"
+                      {...register("confirmPassword", {
+                        pattern: /^(?=.*?[A-Z])(?=.*?[#?!@$%^&*-]).{6,}$/,
+                        required: true,
+                      })}
+                    />
+                    {errors.confirmPassword && (
+                      <span className="text-danger">
+                        Please input at least one uppercase letter and a special
+                        characters.
+                      </span>
+                    )}
+                    {passwordError ? (
+                      <span className="text-danger">{passwordError}</span>
+                    ) : (
+                      ""
                     )}
                   </Form.Group>
                   <Button
