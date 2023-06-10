@@ -1,22 +1,26 @@
 import React from "react";
 import { FaFacebook, FaGithub, FaInstagram } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import logo from "../../assets/logo2.png";
 
 const Footer = () => {
   return (
     <>
-      <footer className="mt-5 container-fluid bg-dark pt-5 pb-3 text-white">
+      <footer
+        className="mt-5 container-fluid pt-5 pb-3 text-white"
+        style={{ backgroundColor: "#010138" }}
+      >
         <div className="container py-5">
           <div className="row g-4">
             <div className="col-md-6 col-lg-4">
               <div className="pb-3">
-                <h2 className="fw-bold fs-1">Fluency Fusion</h2>
-                {/* <img
+                {/* <h2 className="fw-bold fs-1">Fluency Fusion</h2> */}
+                <img
                   src={logo}
                   className="img-fluid"
-                  style={{ width: "13rem" }}
+                  style={{ width: "5rem" }}
                   alt=""
-                /> */}
+                />
               </div>
               <p>We are a Bangladesh based English Learning Platform.</p>
               <p>

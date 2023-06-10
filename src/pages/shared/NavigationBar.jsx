@@ -3,6 +3,7 @@ import { Badge, Button, Container, Nav, Navbar } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import { AuthContext } from "../../providers/AuthProvider";
+import logo from "../../assets/logo.png";
 
 const NavigationBar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -22,14 +23,16 @@ const NavigationBar = () => {
             to={"/"}
             className="fw-bold fs-3 text-dark text-decoration-none"
           >
-            Fluency Fusion
+            <img
+              className="img-fluid"
+              style={{ height: "3.5rem" }}
+              src={logo}
+              alt="Logo"
+            />
           </Link>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
-            <Nav
-              className="mx-auto my-2 my-lg-0"
-              navbarScroll
-            >
+            <Nav className="mx-auto my-2 my-lg-0" navbarScroll>
               <NavLink
                 to={"/"}
                 className={({ isActive }) =>
