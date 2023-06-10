@@ -24,29 +24,29 @@ const Footer = () => {
                   Middle Badda, Dhaka 1212, Bangladesh
                 </span>
                 <span className="d-block">Phone: +098988998 98</span>
-                <span className="d-block">Email: info@tastyBites.com</span>
+                <span className="d-block">Email: info@fluency-fusion.com</span>
               </p>
             </div>
             <div className="col-md-6 col-lg-2">
               <h5 className="pb-4">Our Services</h5>
               <p>
                 <a className="text-decoration-none text-white" href="">
-                  Best Toys
+                  Best Courses
                 </a>
               </p>
               <p>
                 <a className="text-decoration-none text-white" href="">
-                  Kids Zone
+                  Premium Courses
                 </a>
               </p>
               <p>
                 <a className="text-decoration-none text-white" href="">
-                  Foreign Toys
+                  Free Courses
                 </a>
               </p>
               <p>
                 <a className="text-decoration-none text-white" href="">
-                  Best Sevice
+                  English Courses
                 </a>
               </p>
             </div>

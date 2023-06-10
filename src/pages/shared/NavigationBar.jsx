@@ -38,24 +38,24 @@ const NavigationBar = () => {
                 Home
               </NavLink>
               <NavLink
-                to={"/menu"}
+                to={"/instructors"}
                 className={({ isActive }) =>
                   isActive
                     ? "active nav-link fw-bold px-3"
                     : "nav-link text-white px-3"
                 }
               >
-                Our Menu
+                Instructors
               </NavLink>
               <NavLink
-                to={"/contact"}
+                to={"/classes"}
                 className={({ isActive }) =>
                   isActive
                     ? "active nav-link fw-bold px-3"
                     : "nav-link text-white px-3"
                 }
               >
-                Contact US
+                Classes
               </NavLink>
               <NavLink
                 to={"dashboard"}
@@ -68,22 +68,11 @@ const NavigationBar = () => {
                 Dashboard
               </NavLink>
               <NavLink
-                to={"/order/salad"}
-                className={({ isActive }) =>
-                  isActive
-                    ? "active nav-link fw-bold px-3"
-                    : "nav-link text-white px-3"
-                }
-              >
-                Order
-              </NavLink>
-              <NavLink
                 to={"/dashboard/mycart"}
                 className="nav-link text-white px-3"
               >
                 <p>
-                  <FaShoppingCart />{" "}
-                  <Badge bg="warning">+{0}</Badge>
+                  <FaShoppingCart /> <Badge bg="warning">+{0}</Badge>
                 </p>
               </NavLink>
             </Nav>

@@ -1,13 +1,11 @@
 import React from "react";
 import errorImage from "../../assets/404.png";
 import { Link, useRouteError } from "react-router-dom";
-import Head from "../../Components/Head";
 
 const ErrorPage = () => {
   const { error, status } = useRouteError();
   return (
     <>
-      <Head title={"404 not found"} />
       <div className="container pt-3">
         <div className="">
           <img
