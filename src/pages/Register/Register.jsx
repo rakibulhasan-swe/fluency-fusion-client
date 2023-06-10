@@ -69,7 +69,7 @@ const Register = () => {
   return (
     <div>
       <DynamicTitle title={"Register"} />
-      <div className="container-fluid pt-5 mt-5 d-flex justify-content-center align-items-center">
+      <div className="container-fluid pt-3 d-flex justify-content-center align-items-center">
         <div className="container py-5">
           <div className="row d-flex justify-content-center align-items-center">
             <div className="col-lg-6">
