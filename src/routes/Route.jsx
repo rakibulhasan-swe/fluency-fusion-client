@@ -7,6 +7,8 @@ import Register from "../pages/Register/Register";
 import Instructor from "../pages/Instructor/Instructor";
 import AllClass from "../pages/AllClass/AllClass";
 import PrivateRoute from "./PrivateRoute";
+import Dashboard from "../layouts/Dashboard";
+import SelectedClass from "../pages/Dashboard/SelectedClass";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +39,20 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "selectedClass",
+        element: <SelectedClass />
       },
     ],
   },
