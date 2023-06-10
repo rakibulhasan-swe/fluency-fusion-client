@@ -1,4 +1,35 @@
 .active {
-  color: #4470f4 !important;
+  color: #5754f7 !important;
   font-weight: bold !important;
+}
+.btn-primary {
+  background-color: #5754f7 !important;
+  border: 1px solid #5754f7 !important;
+}
+.btn-primary:hover {
+  background-color: #6866f6 !important;
+}
+/* .btn-outline-primary {
+  background-color: #fff !important;
+  color: #19a7ce !important;
+  border: 1px solid #19a7ce !important;
+} */
+/* .btn-outline-primary:hover {
+  background-color: #19a7ce !important;
+  color: #fff !important;
+  border: 1px solid #19a7ce !important;
+} */
+.bg-blur {
+  background: transparent;
+  backdrop-filter: blur(10px);
+}
+.img-border {
+  border: 2px solid #5754f7;
+}
+.d-text {
+  color: #5754f7 !important;
+}
+.img-tran:hover {
+  transition: all linear 0.5s;
+  transform: scale(1.1);
 }

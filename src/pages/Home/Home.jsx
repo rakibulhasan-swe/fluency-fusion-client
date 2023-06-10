@@ -1,11 +1,13 @@
 import React from "react";
 import DynamicTitle from "../../Components/DynamicTitle";
+import Slider from "./Slider";
 
 const Home = () => {
   return (
-    <div>
+    <>
       <DynamicTitle title={"Home"} />
-    </div>
+      <Slider />
+    </>
   );
 };
 

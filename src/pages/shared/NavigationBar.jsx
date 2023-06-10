@@ -16,23 +16,26 @@ const NavigationBar = () => {
 
   return (
     <>
-      <Navbar className="py-3 fixed-top bg-dark" expand="lg">
+      <Navbar className="py-3 sticky-top bg-white shadow" expand="lg">
         <Container>
           <Link
             to={"/"}
-            className="fw-bold fs-3 text-white text-decoration-none"
+            className="fw-bold fs-3 text-dark text-decoration-none"
           >
             Fluency Fusion
           </Link>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
-            <Nav className="mx-auto my-2 my-lg-0" navbarScroll>
+            <Nav
+              className="mx-auto my-2 my-lg-0"
+              navbarScroll
+            >
               <NavLink
                 to={"/"}
                 className={({ isActive }) =>
                   isActive
                     ? "active nav-link fw-bold px-3"
-                    : "nav-link text-white px-3"
+                    : "nav-link text-dark px-3"
                 }
               >
                 Home
@@ -42,7 +45,7 @@ const NavigationBar = () => {
                 className={({ isActive }) =>
                   isActive
                     ? "active nav-link fw-bold px-3"
-                    : "nav-link text-white px-3"
+                    : "nav-link text-dark px-3"
                 }
               >
                 Instructors
@@ -52,7 +55,7 @@ const NavigationBar = () => {
                 className={({ isActive }) =>
                   isActive
                     ? "active nav-link fw-bold px-3"
-                    : "nav-link text-white px-3"
+                    : "nav-link text-dark px-3"
                 }
               >
                 Classes
@@ -62,29 +65,29 @@ const NavigationBar = () => {
                 className={({ isActive }) =>
                   isActive
                     ? "active nav-link fw-bold px-3"
-                    : "nav-link text-white px-3"
+                    : "nav-link text-dark px-3"
                 }
               >
                 Dashboard
               </NavLink>
               <NavLink
                 to={"/dashboard/mycart"}
-                className="nav-link text-white px-3"
+                className="nav-link text-dark px-3"
               >
-                <p>
+                <>
                   <FaShoppingCart /> <Badge bg="primary">+{0}</Badge>
-                </p>
+                </>
               </NavLink>
             </Nav>
             <div className="d-flex">
               {user &&
                 (user?.photoURL ? (
                   <img
-                    className="rounded-circle me-2"
+                    className="rounded-circle me-2 img-border"
                     src={user?.photoURL}
                     style={{
-                      height: "2.4rem",
-                      width: "2.4rem",
+                      height: "2.5rem",
+                      width: "2.5rem",
                       objectFit: "cover",
                     }}
                     alt=""
