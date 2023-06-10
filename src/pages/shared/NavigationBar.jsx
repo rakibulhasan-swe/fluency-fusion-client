@@ -72,7 +72,7 @@ const NavigationBar = () => {
                 className="nav-link text-white px-3"
               >
                 <p>
-                  <FaShoppingCart /> <Badge bg="warning">+{0}</Badge>
+                  <FaShoppingCart /> <Badge bg="primary">+{0}</Badge>
                 </p>
               </NavLink>
             </Nav>

@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../providers/AuthProvider";
 import SocialLogin from "../shared/SocialLogin";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/Ai";
+import DynamicTitle from "../../Components/DynamicTitle";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -49,6 +50,7 @@ const Login = () => {
 
   return (
     <>
+    <DynamicTitle title={"Login"} />
       <div className="container-fluid pt-5 mt-5 d-flex justify-content-center align-items-center">
         <div className="container py-5">
           <div className="row d-flex justify-content-center align-items-center">
@@ -80,19 +82,27 @@ const Login = () => {
                   <InputGroup.Text onClick={() => setShow(!show)}>
                     {show ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
                   </InputGroup.Text>
-                  {errors.password && (
-                    <span className="text-danger">
-                      Password field is required
-                    </span>
-                  )}
-                  {loginError ? (
-                    <span className="text-danger">{loginError}</span>
-                  ) : (
-                    ""
-                  )}
                 </InputGroup>
+                {errors.password && (
+                  <span
+                    className="text-danger d-block"
+                    style={{ marginTop: "-14px" }}
+                  >
+                    Password field is required
+                  </span>
+                )}
+                {loginError ? (
+                  <span
+                    className="text-danger d-block"
+                    style={{ marginTop: "-14px" }}
+                  >
+                    {loginError}
+                  </span>
+                ) : (
+                  ""
+                )}
                 <Button
-                  className="w-100 fw-bold text-white"
+                  className="w-100 fw-bold text-white mt-2"
                   variant="primary"
                   type="submit"
                   style={{ padding: "0.7rem 0rem" }}
