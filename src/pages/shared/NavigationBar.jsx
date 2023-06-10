@@ -1,18 +1,18 @@
-import React from "react";
-import { Badge, Container, Nav, Navbar } from "react-bootstrap";
+import React, { useContext } from "react";
+import { Badge, Button, Container, Nav, Navbar } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const NavigationBar = () => {
-  // const { user, logOut } = useContext(AuthContext);
-  // const [cart] = useCart();
+  const { user, logOut } = useContext(AuthContext);
 
-  // // sign out
-  // const handleSignOut = () => {
-  //   logOut()
-  //     .then(() => {})
-  //     .catch((err) => console.log(err));
-  // };
+  // sign out
+  const handleSignOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((err) => console.log(err));
+  };
 
   return (
     <>
@@ -76,7 +76,7 @@ const NavigationBar = () => {
                 </p>
               </NavLink>
             </Nav>
-            {/* <div className="d-flex">
+            <div className="d-flex">
               {user &&
                 (user?.photoURL ? (
                   <img
@@ -107,7 +107,7 @@ const NavigationBar = () => {
                   Login
                 </Link>
               )}
-            </div> */}
+            </div>
           </Navbar.Collapse>
         </Container>
       </Navbar>

@@ -1,12 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
-import loginImg from "../../assets/others/authentication2.png";
+import React, { useContext } from "react";
 import { Button, Form } from "react-bootstrap";
 import swal from "sweetalert";
-import {
-  loadCaptchaEnginge,
-  LoadCanvasTemplate,
-  validateCaptcha,
-} from "react-simple-captcha";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../providers/AuthProvider";
@@ -17,7 +11,6 @@ const Login = () => {
   const location = useLocation();
   // redirect location
   const redirectLocation = location?.state?.from?.pathname || "/";
-  const [disable, setDisable] = useState(true);
   const { userLogin } = useContext(AuthContext);
   const {
     register,
@@ -38,34 +31,18 @@ const Login = () => {
           button: "Ok",
         });
         // navigate to home
-        navigate(redirectLocation, { replace: true });
+        navigate(redirectLocation || "/", { replace: true });
       })
       .catch((err) => console.log(err));
     // reseting form values
     e.target.reset();
   };
 
-  // recaptcha
-  useEffect(() => {
-    loadCaptchaEnginge(6);
-  }, []);
-
-  // checking captcha values
-  const handleValidateCaptcha = (e) => {
-    const captcha_value = e.target.value;
-    if (validateCaptcha(captcha_value)) {
-      setDisable(false);
-    }
-  };
-
   return (
     <>
-      <div className="container-fluid bg-login d-flex justify-content-center align-items-center">
+      <div className="container-fluid pt-5 mt-5 d-flex justify-content-center align-items-center">
         <div className="container py-5">
           <div className="row d-flex justify-content-center align-items-center">
-            <div className="col-lg-6">
-              <img src={loginImg} className="img-fluid" alt="" />
-            </div>
             <div className="col-lg-6">
               <h3 className="text-center fs-2 pb-3">Login</h3>
               <Form onSubmit={handleSubmit(onSubmit)}>
@@ -99,22 +76,9 @@ const Login = () => {
                     </span>
                   )}
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicCaptcha">
-                  <Form.Label>Captcha</Form.Label>
-                  <Form.Control
-                    onBlur={handleValidateCaptcha}
-                    style={{ padding: "0.7rem" }}
-                    type="text"
-                    placeholder="Write the captcha"
-                  />
-                  <Form.Label className="pt-2">
-                    <LoadCanvasTemplate />
-                  </Form.Label>
-                </Form.Group>
                 <Button
                   className="w-100 fw-bold text-white"
                   variant="primary"
-                  disabled={disable}
                   type="submit"
                   style={{ padding: "0.7rem 0rem" }}
                 >
