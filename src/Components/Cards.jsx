@@ -13,7 +13,7 @@ const Cards = ({ singleBlog }) => {
           <Card.Body>
             <Card.Title className="fw-semibold">{title}</Card.Title>
             <Card.Text className="fw-light">{date}</Card.Text>
-            <Card.Text className="fw-light">{desc}</Card.Text>
+            <Card.Text className="fw-light">{desc.slice(0, 105)}...</Card.Text>
             <Link className="text-decoration-none fw-bold">
               Read More <BsArrowRight />
             </Link>

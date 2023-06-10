@@ -1,3 +1,11 @@
+.cover-bg {
+  min-height: 40vh;
+  background-image: url("./assets/page-bg.png"),
+    linear-gradient(rgba(238, 237, 254, 1), rgba(238, 237, 254, 1));
+  background-blend-mode: multiply;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .active {
   color: #5754f7 !important;
   font-weight: bold !important;
