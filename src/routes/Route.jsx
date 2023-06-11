@@ -9,6 +9,7 @@ import AllClass from "../pages/AllClass/AllClass";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../layouts/Dashboard";
 import SelectedClass from "../pages/Dashboard/SelectedClass";
+import ManageUser from "../pages/Dashboard/ManageUser";
 
 const router = createBrowserRouter([
   {
@@ -51,8 +52,12 @@ const router = createBrowserRouter([
     ),
     children: [
       {
+        path: "manageUsers",
+        element: <ManageUser />
+      },
+      {
         path: "selectedClass",
-        element: <SelectedClass />
+        element: <SelectedClass />,
       },
     ],
   },

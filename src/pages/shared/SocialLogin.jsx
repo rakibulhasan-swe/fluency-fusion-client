@@ -3,6 +3,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { GoogleAuthProvider } from "firebase/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGithub, FaGoogle } from "react-icons/fa";
+import swal from "sweetalert";
 
 const SocialLogin = () => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const SocialLogin = () => {
         const savedUser = {
           name: goggleUser?.displayName,
           email: goggleUser?.email,
+          role: "student",
         };
         fetch("http://localhost:5000/users", {
           method: "POST",
@@ -29,6 +31,7 @@ const SocialLogin = () => {
         })
           .then((res) => res.json())
           .then((data) => {
+            console.log(data);
             if (data.insertedId) {
               // login success alert
               swal({

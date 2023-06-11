@@ -36,26 +36,30 @@ const Register = () => {
         // updating user name
         updateUser(data.name, data?.photoURL)
           .then(() => {
-            // const savedUser = { name: data?.name, email: data?.email };
-            // fetch("http://localhost:5000/users", {
-            //   method: "POST",
-            //   headers: {
-            //     "content-type": "application/json",
-            //   },
-            //   body: JSON.stringify(savedUser),
-            // })
-            //   .then((res) => res.json())
-            //   .then((data) => {
-            //     if (data.insertedId) {
-            //       // login success alert
-            //       swal({
-            //         title: "Good job!",
-            //         text: "Registration Successfull!",
-            //         icon: "success",
-            //         button: "Ok",
-            //       });
-            //     }
-            //   });
+            const savedUser = {
+              name: data?.name,
+              email: data?.email,
+              role: "student",
+            };
+            fetch("http://localhost:5000/users", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(savedUser),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.insertedId) {
+                  // login success alert
+                  swal({
+                    title: "Good job!",
+                    text: "Registration Successfull!",
+                    icon: "success",
+                    button: "Ok",
+                  });
+                }
+              });
           })
           .catch((err) => console.log(err));
         // navigate to home

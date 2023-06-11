@@ -8,7 +8,7 @@ import { FaBook, FaBookmark, FaHome, FaWallet } from "react-icons/fa";
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
 
-  const isAdmin = false;
+  const isAdmin = true;
   const isInstructor = false;
   return (
     <div className="container-fluid">
@@ -20,14 +20,14 @@ const Dashboard = () => {
         variant="white"
       >
         <Container>
-          <Navbar.Brand href="#home">
+          <NavLink to={"/"}>
             <img
               className="img-fluid"
               style={{ height: "3rem" }}
               src={logo}
               alt=""
             />
-          </Navbar.Brand>
+          </NavLink>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ms-auto d-flex justify-content-center align-items-center">
