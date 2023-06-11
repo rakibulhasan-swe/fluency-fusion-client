@@ -1,9 +1,15 @@
-import React from "react";
-import { Table } from "react-bootstrap";
+import React, { useContext, useState } from "react";
+import { Button, Table } from "react-bootstrap";
 import useCourse from "../../hooks/useCourse";
+import { FaUpload } from "react-icons/fa";
+import { AuthContext } from "../../providers/AuthProvider";
+import UpdateModal from "../../Components/UpdateModal";
 
 const InstructorsCourse = () => {
+  const { user } = useContext(AuthContext);
   const [courses, refetch] = useCourse();
+  const [showModal, setShowModal] = useState(0);
+
   return (
     <div className="container p-5">
       <h2>Total Courses: {courses.length}</h2>
@@ -14,7 +20,7 @@ const InstructorsCourse = () => {
             <th>Course Name</th>
             <th>Instructor's Email</th>
             <th>Course Price</th>
-            <th>Enrolled Students</th>
+            <th>Enrolled</th>
             <th>Feedback</th>
             <th>Status</th>
             <th>Action</th>
@@ -31,7 +37,20 @@ const InstructorsCourse = () => {
                 <td>{course.enrolledStudents}</td>
                 <td>{course.feedback}</td>
                 <td>{course.status}</td>
-                <td>Update</td>
+                <td>
+                  <Button onClick={() => setShowModal(course._id)}>
+                    <FaUpload />
+                  </Button>
+                </td>
+                {showModal === course._id ? (
+                  <UpdateModal
+                    course={course}
+                    close={setShowModal}
+                    refetch={refetch}
+                  />
+                ) : (
+                  ""
+                )}
               </tr>
             ))}
         </tbody>

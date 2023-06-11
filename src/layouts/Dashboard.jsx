@@ -17,10 +17,10 @@ const Dashboard = () => {
       .then((err) => console.log(err));
   };
 
-  const isAdmin = false;
+  const isAdmin = true;
   const isInstructor = true;
   return (
-    <div className="container-fluid">
+    <div className="">
       <Navbar
         className="shadow"
         collapseOnSelect
@@ -60,6 +60,7 @@ const Dashboard = () => {
         </Container>
       </Navbar>
       {/* navbar ends */}
+      <div className="container-fluid">
       <div className="row">
         <div
           className="col-lg-3 bg-white shadow-lg"
@@ -186,6 +187,7 @@ const Dashboard = () => {
         <div className="col-lg-9">
           <Outlet />
         </div>
+      </div>
       </div>
     </div>
   );
