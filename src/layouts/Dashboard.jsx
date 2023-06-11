@@ -17,7 +17,7 @@ const Dashboard = () => {
       .then((err) => console.log(err));
   };
 
-  const isAdmin = true;
+  const isAdmin = false;
   const isInstructor = true;
   return (
     <div className="">
@@ -63,7 +63,7 @@ const Dashboard = () => {
       <div className="container-fluid">
       <div className="row">
         <div
-          className="col-lg-3 bg-white shadow-lg"
+          className="col-lg-2 bg-white shadow-lg"
           style={{ minHeight: "88vh" }}
         >
           <div className="d-flex flex-column flex-shrink-0 text-white pt-5">
@@ -72,7 +72,7 @@ const Dashboard = () => {
               <ul className="nav flex-column mb-auto">
                 <li className="nav-item py-1">
                   <NavLink
-                    to={"/dashboard/manageClasses"}
+                    to={"/dashboard/manageCourses"}
                     className={({ isActive }) =>
                       isActive
                         ? "active nav-link fw-bold"
@@ -80,7 +80,7 @@ const Dashboard = () => {
                     }
                   >
                     <FaHome className="me-2" />
-                    Manage Classes
+                    Manage Courses
                   </NavLink>
                 </li>
                 <li className="nav-item py-1">
@@ -111,7 +111,7 @@ const Dashboard = () => {
                         }
                       >
                         <FaHome className="me-2" />
-                        Add Class
+                        Add Course
                       </NavLink>
                     </li>
                     <li className="nav-item py-1">
@@ -124,7 +124,7 @@ const Dashboard = () => {
                         }
                       >
                         <FaBook className="me-2" />
-                        My Classes
+                        My Courses
                       </NavLink>
                     </li>
                   </ul>
@@ -153,7 +153,7 @@ const Dashboard = () => {
                         }
                       >
                         <FaBook className="me-2" />
-                        My Selected Classes
+                        My Selected Courses
                       </NavLink>
                     </li>
                     <li className="nav-item py-1">
@@ -164,7 +164,7 @@ const Dashboard = () => {
                         }
                       >
                         <FaBookmark className="me-2" />
-                        My Enrolled Classes
+                        My Enrolled Courses
                       </NavLink>
                     </li>
                     <li className="nav-item py-1">
@@ -184,7 +184,7 @@ const Dashboard = () => {
             )}
           </div>
         </div>
-        <div className="col-lg-9">
+        <div className="col-lg-10">
           <Outlet />
         </div>
       </div>

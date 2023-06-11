@@ -31,18 +31,18 @@ const InstructorsCourse = () => {
             courses?.map((course, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{course.className}</td>
-                <td>{course.instructorEmail}</td>
-                <td>{course.price}</td>
-                <td>{course.enrolledStudents}</td>
-                <td>{course.feedback}</td>
-                <td>{course.status}</td>
+                <td>{course?.courseName}</td>
+                <td>{course?.instructorEmail}</td>
+                <td>{course?.price}</td>
+                <td>{course?.enrolledStudents}</td>
+                <td>{course?.feedback ? course?.feedback : "No feedback"}</td>
+                <td>{course?.status}</td>
                 <td>
-                  <Button onClick={() => setShowModal(course._id)}>
+                  <Button onClick={() => setShowModal(course?._id)}>
                     <FaUpload />
                   </Button>
                 </td>
-                {showModal === course._id ? (
+                {showModal === course?._id ? (
                   <UpdateModal
                     course={course}
                     close={setShowModal}

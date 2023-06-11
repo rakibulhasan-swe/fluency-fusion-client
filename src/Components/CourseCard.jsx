@@ -4,7 +4,7 @@ import { FaGraduationCap } from "react-icons/fa";
 
 const CourseCard = ({ course }) => {
   const {
-    className,
+    courseName,
     instructorName,
     instructorEmail,
     availableSeats,
@@ -17,7 +17,7 @@ const CourseCard = ({ course }) => {
         <Card className="border-0 shadow">
           <Card.Img variant="top" src={image} />
           <Card.Body className="p-4">
-            <Card.Title className="fw-semibold">{className}</Card.Title>
+            <Card.Title className="fw-semibold">{courseName}</Card.Title>
             <Card.Text className="fw-light">
               Instructor: {instructorName}
             </Card.Text>

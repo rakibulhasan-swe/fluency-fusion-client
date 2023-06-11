@@ -12,6 +12,7 @@ import ManageUser from "../pages/Dashboard/ManageUser";
 import AllCourse from "../pages/AllCourse/AllCourse";
 import AddCourse from "../pages/Dashboard/AddCourse";
 import InstructorsCourse from "../pages/Dashboard/InstructorsCourse";
+import ManageCourse from "../pages/Dashboard/ManageCourse";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
         path: "manageUsers",
         element: <ManageUser />,
+      },
+      {
+        path: "manageCourses",
+        element: <ManageCourse />,
       },
       {
         path: "AddCourse",

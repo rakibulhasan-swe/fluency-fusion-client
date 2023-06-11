@@ -29,7 +29,7 @@ const AddCourse = () => {
         if (imageResponse?.success) {
           const imageUrl = imageResponse?.data?.display_url;
           const newClass = {
-            className: data.name,
+            courseName: data.name,
             instructorName: user?.displayName,
             instructorEmail: user?.email,
             availableSeats: parseInt(data.seats),
@@ -63,15 +63,15 @@ const AddCourse = () => {
         {/* forms */}
         <Form onSubmit={handleSubmit(onSubmit)} className="w-75 mx-auto">
           <Form.Group className="mb-3" controlId="ClassName">
-            <Form.Label>Class Name*</Form.Label>
+            <Form.Label>Course Name*</Form.Label>
             <Form.Control
               style={{ padding: "0.5rem" }}
               type="text"
-              placeholder="Class Name"
+              placeholder="Course Name"
               {...register("name", { required: true })}
             />
             {errors.name && (
-              <span className="text-danger">Class Name field is required</span>
+              <span className="text-danger">Course Name field is required</span>
             )}
           </Form.Group>
           <div className="d-flex">

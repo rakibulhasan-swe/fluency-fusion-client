@@ -7,7 +7,7 @@ const img_hosting_token = "40d978a01cf2746f99f6f7855fe4dc8c";
 
 const UpdateModal = ({ course, close, refetch }) => {
   const { user } = useContext(AuthContext);
-  const { className, availableSeats, price, image } = course || {};
+  const { courseName, availableSeats, price, image } = course || {};
   const [axiosSecure] = useAxiosSecure();
   const {
     register,
@@ -31,7 +31,7 @@ const UpdateModal = ({ course, close, refetch }) => {
           if (imageResponse?.success) {
             const imageUrl = imageResponse?.data?.display_url;
             const newClass = {
-              className: data.name,
+              courseName: data.name,
               instructorName: user?.displayName,
               instructorEmail: user?.email,
               availableSeats: parseInt(data.seats),
@@ -59,7 +59,7 @@ const UpdateModal = ({ course, close, refetch }) => {
         });
     } else {
       const newClass = {
-        className: data.name,
+        courseName: data.name,
         instructorName: user?.displayName,
         instructorEmail: user?.email,
         availableSeats: parseInt(data.seats),
@@ -100,17 +100,17 @@ const UpdateModal = ({ course, close, refetch }) => {
         <Modal.Body>
           <Form onSubmit={handleSubmit(onSubmit)} className="w-75 mx-auto">
             <Form.Group className="mb-3" controlId="ClassName">
-              <Form.Label>Class Name</Form.Label>
+              <Form.Label>Course Name</Form.Label>
               <Form.Control
                 style={{ padding: "0.5rem" }}
                 type="text"
-                placeholder="Class Name"
-                defaultValue={className}
+                placeholder="Course Name"
+                defaultValue={courseName}
                 {...register("name", { required: true })}
               />
               {errors.name && (
                 <span className="text-danger">
-                  Class Name field is required
+                  Course Name field is required
                 </span>
               )}
             </Form.Group>
