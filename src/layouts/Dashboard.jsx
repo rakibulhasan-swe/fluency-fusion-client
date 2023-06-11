@@ -17,8 +17,8 @@ const Dashboard = () => {
       .then((err) => console.log(err));
   };
 
-  const isAdmin = true;
-  const isInstructor = false;
+  const isAdmin = false;
+  const isInstructor = true;
   return (
     <div className="container-fluid">
       <Navbar
