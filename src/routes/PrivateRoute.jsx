@@ -5,8 +5,8 @@ import { Navigate, useLocation } from "react-router-dom";
 
 const PrivateRoute = ({ children }) => {
   const location = useLocation();
-  const { user, loading } = useContext(AuthContext);
-  if (loading) {
+  const { user, loader } = useContext(AuthContext);
+  if (loader) {
     return (
       <div className="text-center pt-5">
         <Spinner variant="primary" />

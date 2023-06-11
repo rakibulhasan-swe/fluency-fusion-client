@@ -15,16 +15,16 @@ export const AuthContext = createContext(null);
 const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loader, setLoader] = useState(true);
 
   // create user
   const createUser = (email, password) => {
-    setLoading(true);
+    setLoader(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
   // update user
   const updateUser = (name, photoURL) => {
-    setLoading(true);
+    setLoader(true);
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photoURL,
@@ -32,17 +32,17 @@ const AuthProvider = ({ children }) => {
   };
   // sign in user
   const userLogin = (email, password) => {
-    setLoading(true);
+    setLoader(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
   // google sign in
   const googleSignIn = (provider) => {
-    setLoading(true);
+    setLoader(true);
     return signInWithPopup(auth, provider);
   };
   // logout user
   const logOut = () => {
-    setLoading(true);
+    setLoader(true);
     return signOut(auth);
   };
 
@@ -56,10 +56,11 @@ const AuthProvider = ({ children }) => {
           .post("http://localhost:5000/jwt", { email: loggedUser.email })
           .then((data) => {
             localStorage.setItem("access-token", data.data.token);
-            setLoading(false);
+            setLoader(false);
           });
       } else {
         localStorage.removeItem("access-token");
+        setLoader(false);
       }
     });
     return () => {
@@ -69,7 +70,7 @@ const AuthProvider = ({ children }) => {
 
   const appInfo = {
     user,
-    loading,
+    loader,
     createUser,
     updateUser,
     userLogin,

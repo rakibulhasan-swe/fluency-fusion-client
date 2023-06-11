@@ -73,14 +73,14 @@ const NavigationBar = () => {
               >
                 Dashboard
               </NavLink>
-              <NavLink
+              {/* <NavLink
                 to={"/dashboard/mycart"}
                 className="nav-link text-dark px-3"
               >
                 <>
                   <FaShoppingCart /> <Badge bg="primary">+{0}</Badge>
                 </>
-              </NavLink>
+              </NavLink> */}
             </Nav>
             <div className="d-flex">
               {user &&

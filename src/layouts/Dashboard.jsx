@@ -1,12 +1,21 @@
 import React, { useContext } from "react";
 import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { AuthContext } from "../providers/AuthProvider";
 import { FaBook, FaBookmark, FaHome, FaUsers, FaWallet } from "react-icons/fa";
 
 const Dashboard = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
+  // logout
+  const signOut = () => {
+    logOut()
+      .then(() => {
+        navigate("/", { replace: true });
+      })
+      .then((err) => console.log(err));
+  };
 
   const isAdmin = true;
   const isInstructor = false;
@@ -42,7 +51,9 @@ const Dashboard = () => {
                 title={user?.displayName}
                 id="collasible-nav-dropdown"
               >
-                <NavDropdown.Item href="#action/3.2">Logout</NavDropdown.Item>
+                <Link className="nav-link" onClick={signOut}>
+                  Logout
+                </Link>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
