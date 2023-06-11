@@ -1,15 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React from "react";
 import { Button, Table } from "react-bootstrap";
-import { FaTrash, FaUsers } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
 import swal from "sweetalert";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const ManageUser = () => {
   // getting user data
-  const { data: users = [], refetch } = useQuery({
-    queryKey: ["users"],
-    queryFn: () =>
-      fetch("http://localhost:5000/users").then((res) => res.json()),
+  const [axiosSecure] = useAxiosSecure();
+  const { data: users = [], refetch } = useQuery(["users"], async () => {
+    const res = await axiosSecure.get("/users");
+    return res.data;
   });
 
   // delete user
