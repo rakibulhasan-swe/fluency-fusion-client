@@ -3,7 +3,7 @@ import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { NavLink, Outlet } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { AuthContext } from "../providers/AuthProvider";
-import { FaBook, FaBookmark, FaHome, FaWallet } from "react-icons/fa";
+import { FaBook, FaBookmark, FaHome, FaUsers, FaWallet } from "react-icons/fa";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
@@ -80,7 +80,7 @@ const Dashboard = () => {
                         : "nav-link text-dark"
                     }
                   >
-                    <FaBook className="me-2" />
+                    <FaUsers className="me-2" />
                     Manage Users
                   </NavLink>
                 </li>

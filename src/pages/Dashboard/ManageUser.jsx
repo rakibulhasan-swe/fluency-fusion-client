@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { FaTrash, FaUsers } from "react-icons/fa";
 import swal from "sweetalert";
@@ -61,6 +61,27 @@ const ManageUser = () => {
       })
       .catch((err) => console.log(err));
   };
+  // make handleMakeInstructtor
+  const handleMakeInstructor = (id) => {
+    fetch(`http://localhost:5000/users/instructor/${id}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.modifiedCount > 0) {
+          // data refetch
+          refetch();
+          // alert
+          swal({
+            title: "Good job!",
+            text: "User updated to Instructor",
+            icon: "success",
+            button: "Ok",
+          });
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="container p-5">
@@ -72,6 +93,7 @@ const ManageUser = () => {
             <th>Name</th>
             <th>Email</th>
             <th>Roll</th>
+            <th>Make Admin or Instructor</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -84,12 +106,31 @@ const ManageUser = () => {
                 <td>{user.email}</td>
                 <td>
                   {user?.role === "admin" ? (
-                    <Button>Admin</Button>
+                    <p>Admin</p>
                   ) : (
-                    <Button onClick={() => handleMakeAdmin(user?._id)}>
-                      <FaUsers />
-                    </Button>
+                    <>
+                      {user?.role === "instructor" ? (
+                        <p>Instructor</p>
+                      ) : (
+                        <p>Student</p>
+                      )}
+                    </>
                   )}
+                </td>
+                <td>
+                  <Button
+                    disabled={user?.role === "admin" ? true : false}
+                    onClick={() => handleMakeAdmin(user?._id)}
+                  >
+                    Admin
+                  </Button>
+                  <Button
+                    disabled={user?.role === "instructor" ? true : false}
+                    onClick={() => handleMakeInstructor(user?._id)}
+                    className="ms-2 my-1"
+                  >
+                    Instructor
+                  </Button>
                 </td>
                 <td>
                   <Button
