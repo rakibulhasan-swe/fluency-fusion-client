@@ -115,7 +115,12 @@ const ManageCourse = () => {
                     </Button>
                     <Button
                       className="ms-2 my-1"
-                      disabled={course?.status === "pending" ? true : false}
+                      disabled={
+                        course?.status === "pending" ||
+                        course?.status === "approved"
+                          ? true
+                          : false
+                      }
                       onClick={() => setShowModal(course?._id)}
                     >
                       Feedback

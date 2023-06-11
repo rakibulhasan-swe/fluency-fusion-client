@@ -13,6 +13,8 @@ import AllCourse from "../pages/AllCourse/AllCourse";
 import AddCourse from "../pages/Dashboard/AddCourse";
 import InstructorsCourse from "../pages/Dashboard/InstructorsCourse";
 import ManageCourse from "../pages/Dashboard/ManageCourse";
+import AdminRoute from "./AdminRoute";
+import InstructorRoute from "./InstructorRoute";
 
 const router = createBrowserRouter([
   {
@@ -57,19 +59,35 @@ const router = createBrowserRouter([
     children: [
       {
         path: "manageUsers",
-        element: <ManageUser />,
+        element: (
+          <AdminRoute>
+            <ManageUser />
+          </AdminRoute>
+        ),
       },
       {
         path: "manageCourses",
-        element: <ManageCourse />,
+        element: (
+          <AdminRoute>
+            <ManageCourse />
+          </AdminRoute>
+        ),
       },
       {
         path: "AddCourse",
-        element: <AddCourse />,
+        element: (
+          <InstructorRoute>
+            <AddCourse />
+          </InstructorRoute>
+        ),
       },
       {
         path: "instructorsCourse",
-        element: <InstructorsCourse />,
+        element: (
+          <InstructorRoute>
+            <InstructorsCourse />
+          </InstructorRoute>
+        ),
       },
       {
         path: "selectedClass",
