@@ -1,12 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import useCourse from "../../hooks/useCourse";
 import { FaUpload } from "react-icons/fa";
-import { AuthContext } from "../../providers/AuthProvider";
 import UpdateModal from "../../Components/UpdateModal";
 
 const InstructorsCourse = () => {
-  const { user } = useContext(AuthContext);
   const [courses, refetch] = useCourse();
   const [showModal, setShowModal] = useState(0);
 
@@ -35,7 +33,11 @@ const InstructorsCourse = () => {
                 <td>{course?.instructorEmail}</td>
                 <td>{course?.price}</td>
                 <td>{course?.enrolledStudents}</td>
-                <td>{course?.feedback ? course?.feedback : "No feedback"}</td>
+                <td>
+                  {course?.feedback
+                    ? course?.feedback.slice(0, 15) + "..."
+                    : "No feedback"}
+                </td>
                 <td>{course?.status}</td>
                 <td>
                   <Button onClick={() => setShowModal(course?._id)}>

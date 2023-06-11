@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import useManageCourse from "../../hooks/useManageCourse";
 import { Button, Table } from "react-bootstrap";
 import { GiConfirmed, GiCancel } from "react-icons/gi";
 import swal from "sweetalert";
+import FeedbackModal from "../../Components/FeedbackModal";
 
 const ManageCourse = () => {
   const [courses, loading, refetch] = useManageCourse();
+  const [showModal, setShowModal] = useState("");
 
   // handle approve
   const handleApprove = (id) => {
@@ -113,10 +115,22 @@ const ManageCourse = () => {
                     </Button>
                     <Button
                       className="ms-2 my-1"
-                      onClick={() => handleFeedback(course?._id)}
+                      disabled={course?.status === "pending" ? true : false}
+                      onClick={() => setShowModal(course?._id)}
                     >
                       Feedback
                     </Button>
+                  </td>
+                  <td>
+                    {showModal === course?._id ? (
+                      <FeedbackModal
+                        close={setShowModal}
+                        course={course}
+                        refetch={refetch}
+                      />
+                    ) : (
+                      ""
+                    )}
                   </td>
                 </tr>
               ))}

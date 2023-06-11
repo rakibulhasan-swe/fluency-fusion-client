@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../providers/AuthProvider";
@@ -37,9 +37,9 @@ const UpdateModal = ({ course, close, refetch }) => {
               availableSeats: parseInt(data.seats),
               price: parseFloat(data.price),
               image: imageUrl,
-              status: "pending",
-              enrolledStudents: 0,
-              feedback: "",
+              status: course?.status,
+              enrolledStudents: course?.enrolledStudents,
+              feedback: course?.feedback,
             };
             axiosSecure
               .patch(`/courses/${course._id}`, newClass)
@@ -65,14 +65,14 @@ const UpdateModal = ({ course, close, refetch }) => {
         availableSeats: parseInt(data.seats),
         price: parseFloat(data.price),
         image: course?.image,
-        status: "pending",
-        enrolledStudents: 0,
-        feedback: "",
+        status: course?.status,
+        enrolledStudents: course?.enrolledStudents,
+        feedback: course?.feedback,
       };
       axiosSecure.patch(`/courses/${course._id}`, newClass).then((newData) => {
-        if (newData?.data.modifiedCount > 0) {
+        if (newData?.data?.modifiedCount > 0) {
           refetch();
-          // login success alert
+          // update success alert
           swal({
             title: "Good job!",
             text: "Course Updated Successfully!",
@@ -87,7 +87,7 @@ const UpdateModal = ({ course, close, refetch }) => {
     e.target.reset();
   };
   return (
-    <div>
+    <>
       <Modal
         show={true}
         onHide={() => close(0)}
@@ -201,7 +201,7 @@ const UpdateModal = ({ course, close, refetch }) => {
           </Button>
         </Modal.Footer>
       </Modal>
-    </div>
+    </>
   );
 };
 
