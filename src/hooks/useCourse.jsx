@@ -3,21 +3,20 @@ import useAxiosSecure from "./useAxiosSecure";
 import { AuthContext } from "../providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 
-const useClass = () => {
-  const { loader } = useContext(AuthContext);
-  // const token = localStorage.getItem("access-token");
+const useCourse = () => {
+  const { user, loader } = useContext(AuthContext);
   const [axiosSecure] = useAxiosSecure();
 
-  const { refetch, data: allClass = [] } = useQuery({
-    queryKey: ["classes"],
+  const { data: courses = [], refetch } = useQuery({
+    queryKey: ["courses", user?.email],
     enabled: !loader,
     queryFn: async () => {
-      const res = await axiosSecure(`/classes`);
+      const res = await axiosSecure(`/coursesByEmail?email=${user?.email}`);
       return res.data;
     },
   });
 
-  return [allClass, refetch];
+  return [courses, refetch];
 };
 
-export default useClass;
+export default useCourse;

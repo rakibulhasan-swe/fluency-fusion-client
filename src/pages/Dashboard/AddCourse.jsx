@@ -5,7 +5,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const img_hosting_token = "40d978a01cf2746f99f6f7855fe4dc8c";
-const AddClass = () => {
+const AddCourse = () => {
   const [axiosSecure] = useAxiosSecure();
   const { user } = useContext(AuthContext);
   const {
@@ -36,8 +36,10 @@ const AddClass = () => {
             price: parseFloat(data.price),
             image: imageUrl,
             status: "pending",
+            enrolledStudents: 0,
+            feedback: "",
           };
-          axiosSecure.post("/classes", newClass).then((newData) => {
+          axiosSecure.post("/courses", newClass).then((newData) => {
             if (newData?.data?.insertedId) {
               // login success alert
               swal({
@@ -150,4 +152,4 @@ const AddClass = () => {
   );
 };
 
-export default AddClass;
+export default AddCourse;

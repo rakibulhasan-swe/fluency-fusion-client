@@ -2,18 +2,18 @@ import React from "react";
 import Cover from "../shared/Cover";
 import DynamicTitle from "../../Components/DynamicTitle";
 import CourseCard from "../../Components/CourseCard";
-import useClass from "../../hooks/useClass";
+import { useLoaderData } from "react-router-dom";
 
-const AllClass = () => {
-  const [allClass] = useClass();
+const AllCourse = () => {
+  const allCourse = useLoaderData();
   return (
     <>
       <DynamicTitle title={"Classes"} />
       <Cover title={"All Course's"} />
       <div className="container py-5">
         <div className="row g-4 d-flex justify-content-center align-items-center">
-          {allClass.length > 0 &&
-            allClass.map((course) => (
+          {allCourse.length > 0 &&
+            allCourse.map((course) => (
               <CourseCard key={course?._id} course={course} />
             ))}
         </div>
@@ -22,4 +22,4 @@ const AllClass = () => {
   );
 };
 
-export default AllClass;
+export default AllCourse;

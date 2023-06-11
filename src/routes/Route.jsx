@@ -5,12 +5,13 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import Instructor from "../pages/Instructor/Instructor";
-import AllClass from "../pages/AllClass/AllClass";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../layouts/Dashboard";
 import SelectedClass from "../pages/Dashboard/SelectedClass";
 import ManageUser from "../pages/Dashboard/ManageUser";
-import AddClass from "../pages/Dashboard/AddClass";
+import AllCourse from "../pages/AllCourse/AllCourse";
+import AddCourse from "../pages/Dashboard/AddCourse";
+import InstructorsCourse from "../pages/Dashboard/InstructorsCourse";
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/classes",
-        element: <AllClass />,
+        element: <AllCourse />,
+        loader: () => fetch("http://localhost:5000/courses"),
       },
       {
         path: "/login",
@@ -57,8 +59,12 @@ const router = createBrowserRouter([
         element: <ManageUser />,
       },
       {
-        path: "addClass",
-        element: <AddClass />,
+        path: "AddCourse",
+        element: <AddCourse />,
+      },
+      {
+        path: "instructorsCourse",
+        element: <InstructorsCourse />,
       },
       {
         path: "selectedClass",

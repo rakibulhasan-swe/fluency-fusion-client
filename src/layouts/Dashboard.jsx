@@ -102,7 +102,7 @@ const Dashboard = () => {
                   <ul className="nav flex-column mb-auto">
                     <li className="nav-item py-1">
                       <NavLink
-                        to={"/dashboard/addClass"}
+                        to={"/dashboard/AddCourse"}
                         className={({ isActive }) =>
                           isActive
                             ? "active nav-link fw-bold"
@@ -115,7 +115,7 @@ const Dashboard = () => {
                     </li>
                     <li className="nav-item py-1">
                       <NavLink
-                        to={"/dashboard/instructorClasses"}
+                        to={"/dashboard/instructorsCourse"}
                         className={({ isActive }) =>
                           isActive
                             ? "active nav-link fw-bold"
