@@ -20,6 +20,7 @@ const SocialLogin = () => {
         const savedUser = {
           name: goggleUser?.displayName,
           email: goggleUser?.email,
+          image: goggleUser?.photoURL,
           role: "student",
         };
         fetch("http://localhost:5000/users", {

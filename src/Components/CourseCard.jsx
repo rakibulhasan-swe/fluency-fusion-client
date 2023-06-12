@@ -1,17 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import { FaGraduationCap } from "react-icons/fa";
 import { AuthContext } from "../providers/AuthProvider";
 import swal from "sweetalert";
-import useAdmin from "../hooks/useAdmin";
-import useInstructor from "../hooks/useInstructor";
-import useEnrolled from "../hooks/useEnrolled";
 
 const CourseCard = ({ course }) => {
   const { user } = useContext(AuthContext);
-  const [enrolled, refetch] = useEnrolled();
-  const [isAdmin] = useAdmin();
-  const [isInstructor] = useInstructor();
   const {
     courseName,
     instructorName,
@@ -39,7 +33,6 @@ const CourseCard = ({ course }) => {
         .then((res) => res.json())
         .then((data) => {
           if (data?.insertedId) {
-            refetch(); // updating the enrolled number
             swal({
               title: "Good job!",
               text: "Course Enrolled Successfully!",
@@ -76,9 +69,7 @@ const CourseCard = ({ course }) => {
               <Card.Text>Enrolled: {enrolledStudents}</Card.Text>
               <Button
                 className="btn-primary"
-                disabled={
-                  !availableSeats || isAdmin || isInstructor ? true : false
-                }
+                disabled={!availableSeats ? true : false}
                 onClick={() => handleEnrolled(course)}
               >
                 Enroll Now
