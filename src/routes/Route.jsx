@@ -7,7 +7,6 @@ import Register from "../pages/Register/Register";
 import Instructor from "../pages/Instructor/Instructor";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../layouts/Dashboard";
-import SelectedClass from "../pages/Dashboard/SelectedClass";
 import ManageUser from "../pages/Dashboard/ManageUser";
 import AllCourse from "../pages/AllCourse/AllCourse";
 import AddCourse from "../pages/Dashboard/AddCourse";
@@ -15,6 +14,8 @@ import InstructorsCourse from "../pages/Dashboard/InstructorsCourse";
 import ManageCourse from "../pages/Dashboard/ManageCourse";
 import AdminRoute from "./AdminRoute";
 import InstructorRoute from "./InstructorRoute";
+import SelectedCourse from "../pages/Dashboard/SelectedCourse";
+import Payment from "../pages/Dashboard/Payment";
 
 const router = createBrowserRouter([
   {
@@ -28,11 +29,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/instructors",
-        element: (
-          <PrivateRoute>
-            <Instructor />
-          </PrivateRoute>
-        ),
+        element: <Instructor />,
       },
       {
         path: "/classes",
@@ -90,8 +87,12 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "selectedClass",
-        element: <SelectedClass />,
+        path: "selectedCourses",
+        element: <SelectedCourse />,
+      },
+      {
+        path: "payment/:id",
+        element: <Payment />,
       },
     ],
   },

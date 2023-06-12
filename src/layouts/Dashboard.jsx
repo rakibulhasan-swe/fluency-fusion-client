@@ -21,8 +21,6 @@ const Dashboard = () => {
       .then((err) => console.log(err));
   };
 
-  console.log(isAdmin, isInstructor);
-
   return (
     <div className="">
       <Navbar
@@ -149,7 +147,7 @@ const Dashboard = () => {
                       </li>
                       <li className="nav-item py-1">
                         <NavLink
-                          to={"/dashboard/selectedClass"}
+                          to={"/dashboard/selectedCourses"}
                           className={({ isActive }) =>
                             isActive
                               ? "active nav-link fw-bold"

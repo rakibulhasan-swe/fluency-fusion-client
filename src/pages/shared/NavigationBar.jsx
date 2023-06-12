@@ -63,16 +63,18 @@ const NavigationBar = () => {
               >
                 Classes
               </NavLink>
-              <NavLink
-                to={"dashboard"}
-                className={({ isActive }) =>
-                  isActive
-                    ? "active nav-link fw-bold px-3"
-                    : "nav-link text-dark px-3"
-                }
-              >
-                Dashboard
-              </NavLink>
+              {user && (
+                <NavLink
+                  to={"dashboard"}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "active nav-link fw-bold px-3"
+                      : "nav-link text-dark px-3"
+                  }
+                >
+                  Dashboard
+                </NavLink>
+              )}
               {/* <NavLink
                 to={"/dashboard/mycart"}
                 className="nav-link text-dark px-3"
