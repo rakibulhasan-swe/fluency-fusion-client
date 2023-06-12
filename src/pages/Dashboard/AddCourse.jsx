@@ -4,7 +4,8 @@ import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { AuthContext } from "../../providers/AuthProvider";
 
-const img_hosting_token = "40d978a01cf2746f99f6f7855fe4dc8c";
+const img_hosting_token = import.meta.env.VITE_IMG_BB_TOKEN;
+
 const AddCourse = () => {
   const [axiosSecure] = useAxiosSecure();
   const { user } = useContext(AuthContext);

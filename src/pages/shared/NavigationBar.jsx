@@ -1,12 +1,27 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Badge, Button, Container, Nav, Navbar } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
+import { BsSun, BsMoon } from "react-icons/bs";
 import { AuthContext } from "../../providers/AuthProvider";
 import logo from "../../assets/logo.png";
 
 const NavigationBar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [theme, setTheme] = useState("light");
+
+  useEffect(() => {
+    const html = document.querySelector("html");
+    html.setAttribute("data-bs-theme", theme);
+  }, [theme]);
+
+  const handleThemeChange = () => {
+    if (theme === "light") {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+  };
 
   // sign out
   const handleSignOut = () => {
@@ -17,7 +32,14 @@ const NavigationBar = () => {
 
   return (
     <>
-      <Navbar className="py-3 sticky-top bg-white shadow" expand="lg">
+      <Navbar
+        className="py-3 sticky-top shadow"
+        expand="lg"
+        style={{
+          backdropFilter: "blur(30px)",
+          background: theme === "light" ? "rgb(255,255,255, 0.5" : "rgb(0,0,0, 0.5)",
+        }}
+      >
         <Container>
           <Link
             to={"/"}
@@ -36,9 +58,7 @@ const NavigationBar = () => {
               <NavLink
                 to={"/"}
                 className={({ isActive }) =>
-                  isActive
-                    ? "active nav-link fw-bold px-3"
-                    : "nav-link text-dark px-3"
+                  isActive ? "active nav-link fw-bold px-3" : "nav-link px-3"
                 }
               >
                 Home
@@ -46,9 +66,7 @@ const NavigationBar = () => {
               <NavLink
                 to={"/instructors"}
                 className={({ isActive }) =>
-                  isActive
-                    ? "active nav-link fw-bold px-3"
-                    : "nav-link text-dark px-3"
+                  isActive ? "active nav-link fw-bold px-3" : "nav-link px-3"
                 }
               >
                 Instructors
@@ -56,9 +74,7 @@ const NavigationBar = () => {
               <NavLink
                 to={"/courses"}
                 className={({ isActive }) =>
-                  isActive
-                    ? "active nav-link fw-bold px-3"
-                    : "nav-link text-dark px-3"
+                  isActive ? "active nav-link fw-bold px-3" : "nav-link px-3"
                 }
               >
                 Courses
@@ -67,9 +83,7 @@ const NavigationBar = () => {
                 <NavLink
                   to={"dashboard"}
                   className={({ isActive }) =>
-                    isActive
-                      ? "active nav-link fw-bold px-3"
-                      : "nav-link text-dark px-3"
+                    isActive ? "active nav-link fw-bold px-3" : "nav-link px-3"
                   }
                 >
                   Dashboard
@@ -115,6 +129,13 @@ const NavigationBar = () => {
                   Login
                 </Link>
               )}
+              <Button
+                className="ms-2 rounded-circle"
+                onClick={handleThemeChange}
+              >
+                {theme == "light" ? <BsMoon /> : <BsSun />}
+              </Button>
+              {/*  */}
             </div>
           </Navbar.Collapse>
         </Container>

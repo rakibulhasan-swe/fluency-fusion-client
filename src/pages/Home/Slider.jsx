@@ -6,6 +6,7 @@ import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import banner1 from "../../assets/banner-1.png";
+import banner2 from "../../assets/banner-2.png";
 
 const Slider = () => {
   return (
@@ -25,13 +26,13 @@ const Slider = () => {
           <img className="img-fluid" src={banner1} />
         </SwiperSlide>
         <SwiperSlide>
-          <img className="img-fluid" src={banner1} />
+          <img className="img-fluid" src={banner2} />
         </SwiperSlide>
         <SwiperSlide>
           <img className="img-fluid" src={banner1} />
         </SwiperSlide>
         <SwiperSlide>
-          <img className="img-fluid" src={banner1} />
+          <img className="img-fluid" src={banner2} />
         </SwiperSlide>
       </Swiper>
     </div>

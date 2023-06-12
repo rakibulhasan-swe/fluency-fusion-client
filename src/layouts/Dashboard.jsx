@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
@@ -6,12 +6,20 @@ import { AuthContext } from "../providers/AuthProvider";
 import { FaBook, FaBookmark, FaHome, FaUsers, FaWallet } from "react-icons/fa";
 import useAdmin from "../hooks/useAdmin";
 import useInstructor from "../hooks/useInstructor";
+import { Bounce, Hinge, JackInTheBox, Zoom } from "react-awesome-reveal";
 
 const Dashboard = () => {
   const { user, logOut } = useContext(AuthContext);
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document
+      .querySelector("html")
+      .setAttribute("data-bs-theme", "light");
+  }, []);
+
   // logout
   const signOut = () => {
     logOut()
@@ -72,114 +80,137 @@ const Dashboard = () => {
               {/* admin items */}
               {isAdmin ? (
                 <ul className="nav flex-column mb-auto">
-                  <li className="nav-item py-1">
-                    <NavLink
-                      to={"/dashboard/manageCourses"}
-                      className={({ isActive }) =>
-                        isActive
-                          ? "active nav-link fw-bold"
-                          : "nav-link text-dark"
-                      }
-                    >
-                      <FaHome className="me-2" />
-                      Manage Courses
-                    </NavLink>
-                  </li>
-                  <li className="nav-item py-1">
-                    <NavLink
-                      to={"/dashboard/manageUsers"}
-                      className={({ isActive }) =>
-                        isActive
-                          ? "active nav-link fw-bold"
-                          : "nav-link text-dark"
-                      }
-                    >
-                      <FaUsers className="me-2" />
-                      Manage Users
-                    </NavLink>
-                  </li>
+                  <JackInTheBox>
+                    <li className="nav-item py-1">
+                      <NavLink
+                        to={"/dashboard/manageCourses"}
+                        className={({ isActive }) =>
+                          isActive
+                            ? "active nav-link fw-bold"
+                            : "nav-link text-dark"
+                        }
+                      >
+                        <FaHome className="me-2" />
+                        Manage Courses
+                      </NavLink>
+                    </li>
+                  </JackInTheBox>
+
+                  <JackInTheBox>
+                    <li className="nav-item py-1">
+                      <NavLink
+                        to={"/dashboard/manageUsers"}
+                        className={({ isActive }) =>
+                          isActive
+                            ? "active nav-link fw-bold"
+                            : "nav-link text-dark"
+                        }
+                      >
+                        <FaUsers className="me-2" />
+                        Manage Users
+                      </NavLink>
+                    </li>
+                  </JackInTheBox>
                 </ul>
               ) : (
                 <>
                   {isInstructor ? (
                     <ul className="nav flex-column mb-auto">
-                      <li className="nav-item py-1">
-                        <NavLink
-                          to={"/dashboard/AddCourse"}
-                          className={({ isActive }) =>
-                            isActive
-                              ? "active nav-link fw-bold"
-                              : "nav-link text-dark"
-                          }
-                        >
-                          <FaHome className="me-2" />
-                          Add Course
-                        </NavLink>
-                      </li>
-                      <li className="nav-item py-1">
-                        <NavLink
-                          to={"/dashboard/instructorsCourse"}
-                          className={({ isActive }) =>
-                            isActive
-                              ? "active nav-link fw-bold"
-                              : "nav-link text-dark"
-                          }
-                        >
-                          <FaBook className="me-2" />
-                          My Courses
-                        </NavLink>
-                      </li>
+                      <JackInTheBox>
+                        <li className="nav-item py-1">
+                          <NavLink
+                            to={"/dashboard/AddCourse"}
+                            className={({ isActive }) =>
+                              isActive
+                                ? "active nav-link fw-bold"
+                                : "nav-link text-dark"
+                            }
+                          >
+                            <FaHome className="me-2" />
+                            Add Course
+                          </NavLink>
+                        </li>
+                      </JackInTheBox>
+                      <JackInTheBox>
+                        <li className="nav-item py-1">
+                          <NavLink
+                            to={"/dashboard/instructorsCourse"}
+                            className={({ isActive }) =>
+                              isActive
+                                ? "active nav-link fw-bold"
+                                : "nav-link text-dark"
+                            }
+                          >
+                            <FaBook className="me-2" />
+                            My Courses
+                          </NavLink>
+                        </li>
+                      </JackInTheBox>
                     </ul>
                   ) : (
                     <ul className="nav flex-column mb-auto">
-                      <li className="nav-item py-1">
-                        <NavLink
-                          to={"/dashboard/home"}
-                          className={({ isActive }) =>
-                            isActive
-                              ? "active nav-link fw-bold"
-                              : "nav-link text-dark"
-                          }
-                        >
-                          <FaHome className="me-2" />
-                          Home
-                        </NavLink>
-                      </li>
-                      <li className="nav-item py-1">
-                        <NavLink
-                          to={"/dashboard/selectedCourses"}
-                          className={({ isActive }) =>
-                            isActive
-                              ? "active nav-link fw-bold"
-                              : "nav-link text-dark"
-                          }
-                        >
-                          <FaBook className="me-2" />
-                          My Selected Courses
-                        </NavLink>
-                      </li>
-                      <li className="nav-item py-1">
-                        <NavLink
-                          to={"/dashboard/purchasedCourse"}
-                          className={({ isActive }) =>
-                            isActive ? "active nav-link" : "nav-link text-dark"
-                          }
-                        >
-                          <FaBookmark className="me-2" />
-                          My Enrolled Courses
-                        </NavLink>
-                      </li>
-                      <li className="nav-item py-1">
-                        <NavLink
-                          to={"/dashboard/paymentHistory"}
-                          className={({ isActive }) =>
-                            isActive ? "active nav-link" : "nav-link text-dark"
-                          }
-                        >
-                          <FaWallet className="me-2" />
-                          Payment History
-                        </NavLink>
-                      </li>
+                      <JackInTheBox>
+                        <li className="nav-item py-1">
+                          <NavLink
+                            to={"/dashboard/home"}
+                            className={({ isActive }) =>
+                              isActive
+                                ? "active nav-link fw-bold"
+                                : "nav-link text-dark"
+                            }
+                          >
+                            <FaHome className="me-2" />
+                            Home
+                          </NavLink>
+                        </li>
+                      </JackInTheBox>
+                      <JackInTheBox>
+                        <li className="nav-item py-1">
+                          <NavLink
+                            to={"/dashboard/selectedCourses"}
+                            className={({ isActive }) =>
+                              isActive
+                                ? "active nav-link fw-bold"
+                                : "nav-link text-dark"
+                            }
+                          >
+                            <FaBook className="me-2" />
+                            My Selected Courses
+                          </NavLink>
+                        </li>
+                      </JackInTheBox>
+
+                      <JackInTheBox>
+                        <li className="nav-item py-1">
+                          <NavLink
+                            to={"/dashboard/purchasedCourse"}
+                            className={({ isActive }) =>
+                              isActive
+                                ? "active nav-link"
+                                : "nav-link text-dark"
+                            }
+                          >
+                            <FaBookmark className="me-2" />
+                            My Enrolled Courses
+                          </NavLink>
+                        </li>
+                      </JackInTheBox>
+
+                      <JackInTheBox>
+                        <li className="nav-item py-1">
+                          <NavLink
+                            to={"/dashboard/paymentHistory"}
+                            className={({ isActive }) =>
+                              isActive
+                                ? "active nav-link"
+                                : "nav-link text-dark"
+                            }
+                          >
+                            <FaWallet className="me-2" />
+                            Payment History
+                          </NavLink>
+                        </li>
+                      </JackInTheBox>
                     </ul>
                   )}
                 </>

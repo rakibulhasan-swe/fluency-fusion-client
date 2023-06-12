@@ -16,11 +16,10 @@ const CourseCard = ({ course }) => {
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);
-        if (data.length > 0 && user?.email) {
+        if (data.length > 0) {
           const current = data?.find(
             (singleUser) => singleUser.email === user?.email
           );
-          // console.log(user?.email);
           setLoading(false);
           setCurrentRole(current?.role);
         }
@@ -107,7 +106,11 @@ const CourseCard = ({ course }) => {
                 <Button
                   className="btn-primary"
                   disabled={
-                    !availableSeats || currentRole !== "student" ? true : false
+                    !availableSeats ||
+                    currentRole === "admin" ||
+                    currentRole === "instructor"
+                      ? true
+                      : false
                   }
                   onClick={() => handleEnrolled(course)}
                 >
