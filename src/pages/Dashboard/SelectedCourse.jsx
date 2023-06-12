@@ -14,6 +14,7 @@ const SelectedCourse = () => {
         <thead>
           <tr>
             <th>#</th>
+            <th>Image</th>
             <th>Course Name</th>
             <th>Instructor Name</th>
             <th>Instructor Email</th>
@@ -41,7 +42,7 @@ const SelectedCourseRow = ({ course, index }) => {
       .then((res) => res.json())
       .then((data) => setEnrolled(data));
   }, []);
-  const { courseName, instructorName, instructorEmail, price } = enrolled || {};
+  const { image, courseName, instructorName, instructorEmail, price } = enrolled || {};
   // delete course
   const handleDelete = (id) => {
     swal({
@@ -75,6 +76,9 @@ const SelectedCourseRow = ({ course, index }) => {
     <>
       <tr>
         <td>{index + 1}</td>
+        <td>
+          <img src={image} style={{ height: "2.4rem" }} alt="" />
+        </td>
         <td>{courseName}</td>
         <td>{instructorName}</td>
         <td>{instructorEmail}</td>

@@ -66,14 +66,14 @@ const CheckoutForm = ({ course, price }) => {
     setProcessing(false);
 
     if (paymentIntent.status === "succeeded") {
-      const { courseId } = course;
+      const { _id } = course;
       setTransactionId(paymentIntent.id);
       // save payment info to server
       const payment = {
         email: user?.email,
         transactionId: paymentIntent.id,
         date: new Date(),
-        purchasedId: courseId,
+        purchasedId: _id,
       };
       axiosSecure.post("/payments", payment).then((res) => {
         if (res.data.result.insertedId) {
