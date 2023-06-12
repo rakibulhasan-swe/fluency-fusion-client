@@ -3,9 +3,31 @@ import { Button, Card } from "react-bootstrap";
 import { FaGraduationCap } from "react-icons/fa";
 import { AuthContext } from "../providers/AuthProvider";
 import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
 
 const CourseCard = ({ course }) => {
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
+  const [currentRole, setCurrentRole] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/allAdminOrInstructor")
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        if (data.length > 0 && user.email) {
+          const current = data?.find(
+            (singleUser) => singleUser.email === user?.email
+          );
+          // console.log(user?.email);
+          setLoading(false);
+          setCurrentRole(current?.role);
+        }
+      });
+  }, [user]);
+
+  console.log(currentRole);
   const {
     courseName,
     instructorName,
@@ -16,31 +38,45 @@ const CourseCard = ({ course }) => {
   } = course;
   const handleEnrolled = (course) => {
     if (user) {
-      // giving two extra value
-      const enrolledCourse = {
-        userEmail: user?.email,
-        userName: user?.displayName,
-        ...course,
-      };
-      // creating enrolled courses
-      fetch("http://localhost:5000/enrolled", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(enrolledCourse),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data?.insertedId) {
-            swal({
-              title: "Good job!",
-              text: "Course Enrolled Successfully!",
-              icon: "success",
-              button: "ok",
-            });
-          }
-        });
+      if (user) {
+        const { _id } = course;
+        // giving two extra value
+        const enrolledCourse = {
+          userEmail: user?.email,
+          userName: user?.displayName,
+          courseId: _id,
+        };
+        // creating enrolled courses
+        fetch("http://localhost:5000/enrolled", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(enrolledCourse),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data?.insertedId) {
+              swal({
+                title: "Good job!",
+                text: "Course Enrolled Successfully!",
+                icon: "success",
+                button: "ok",
+              });
+            }
+          });
+      }
+    } else {
+      swal({
+        title: "You need to login first",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          navigate("/login", { replace: true });
+        }
+      });
     }
   };
   return (
@@ -67,13 +103,19 @@ const CourseCard = ({ course }) => {
             <hr />
             <div className="d-flex justify-content-between align-items-center">
               <Card.Text>Enrolled: {enrolledStudents}</Card.Text>
-              <Button
-                className="btn-primary"
-                disabled={!availableSeats ? true : false}
-                onClick={() => handleEnrolled(course)}
-              >
-                Enroll Now
-              </Button>
+              {loading ? (
+                "loading..."
+              ) : (
+                <Button
+                  className="btn-primary"
+                  disabled={
+                    !availableSeats || currentRole !== "student" ? true : false
+                  }
+                  onClick={() => handleEnrolled(course)}
+                >
+                  Enroll Now
+                </Button>
+              )}
             </div>
           </Card.Body>
         </Card>

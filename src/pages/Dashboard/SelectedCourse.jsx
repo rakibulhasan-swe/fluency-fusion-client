@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useEnrolled from "../../hooks/useEnrolled";
 import { Button, Table } from "react-bootstrap";
 import { FaTrash, FaWallet } from "react-icons/fa";
@@ -56,30 +56,42 @@ const SelectedCourse = () => {
         <tbody>
           {enrolled?.length > 0 &&
             enrolled?.map((course, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{course?.courseName}</td>
-                <td>{course?.instructorName}</td>
-                <td>{course?.instructorEmail}</td>
-                <td>${course?.price}</td>
-                <td>
-                  <Link to={`/dashboard/payment/${course?._id}`}>
-                    <Button className="me-1 my-1" variant="primary">
-                      <FaWallet /> Pay
-                    </Button>
-                  </Link>
-                  <Button
-                    variant="danger"
-                    onClick={() => handleDelete(course?._id)}
-                  >
-                    <FaTrash />
-                  </Button>
-                </td>
-              </tr>
+              <SelectedCourseRow course={course} index={index} />
             ))}
         </tbody>
       </Table>
     </div>
+  );
+};
+
+const SelectedCourseRow = ({ course, index }) => {
+  const [enrolled, setEnrolled] = useState({});
+  useEffect(() => {
+    fetch(`http://localhost:5000/courses/${course.courseId}`)
+      .then((res) => res.json())
+      .then((data) => setEnrolled(data));
+  }, []);
+  const { courseName, instructorName, instructorEmail, price } = enrolled || {};
+  return (
+    <>
+      <tr>
+        <td>{index + 1}</td>
+        <td>{courseName}</td>
+        <td>{instructorName}</td>
+        <td>{instructorEmail}</td>
+        <td>${price}</td>
+        <td>
+          <Link to={`/dashboard/payment/${course?._id}`}>
+            <Button className="me-1 my-1" variant="primary">
+              <FaWallet /> Pay
+            </Button>
+          </Link>
+          <Button variant="danger" onClick={() => handleDelete(course?._id)}>
+            <FaTrash />
+          </Button>
+        </td>
+      </tr>
+    </>
   );
 };
 

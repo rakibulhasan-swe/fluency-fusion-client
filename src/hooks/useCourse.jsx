@@ -5,12 +5,12 @@ import { useQuery } from "@tanstack/react-query";
 const useCourse = () => {
   const { loader } = useContext(AuthContext);
 
-  const { data: courses = [], refetch } = useQuery({
+  const { refetch, data: courses = [] } = useQuery({
     queryKey: ["courses"],
     enabled: !loader,
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/courses");
-      return res.json();
+      const res = await axiosSecure(`/courses`);
+      return res.data;
     },
   });
 
