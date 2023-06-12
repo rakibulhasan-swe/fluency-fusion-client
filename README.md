@@ -18,4 +18,4 @@
 * React Helmet (for dynamic title)
 * react-reveal (for animation)
 
-# Website link -- [fluencyFusion]([https://toytopia-59627.web.app](https://fluency-fusion.web.app/)
+# Website link -- [fluencyFusion]([https://toytopia-59627.web.app](https://fluency-fusion.web.app/)]
