@@ -6,9 +6,42 @@ import swal from "sweetalert";
 import { Link } from "react-router-dom";
 
 const SelectedCourse = () => {
-  // getting enrolled classes
-  const [enrolled, refetch] = useEnrolled();
+  const [enrolled] = useEnrolled();
+  return (
+    <div className="container p-5">
+      <h2>Total Selected Courses: {enrolled.length}</h2>
+      <Table striped bordered hover size="lg" className="mt-3" responsive>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Course Name</th>
+            <th>Instructor Name</th>
+            <th>Instructor Email</th>
+            <th>Price</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {enrolled?.length > 0 &&
+            enrolled?.map((course, index) => (
+              <SelectedCourseRow course={course} index={index} />
+            ))}
+        </tbody>
+      </Table>
+    </div>
+  );
+};
 
+const SelectedCourseRow = ({ course, index }) => {
+  // getting enrolled classes
+  const [, refetch] = useEnrolled();
+  const [enrolled, setEnrolled] = useState({});
+  useEffect(() => {
+    fetch(`http://localhost:5000/courses/${course.courseId}`)
+      .then((res) => res.json())
+      .then((data) => setEnrolled(data));
+  }, []);
+  const { courseName, instructorName, instructorEmail, price } = enrolled || {};
   // delete course
   const handleDelete = (id) => {
     swal({
@@ -38,40 +71,6 @@ const SelectedCourse = () => {
       }
     });
   };
-
-  return (
-    <div className="container p-5">
-      <h2>Total Selected Courses: {enrolled.length}</h2>
-      <Table striped bordered hover size="lg" className="mt-3" responsive>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Course Name</th>
-            <th>Instructor Name</th>
-            <th>Instructor Email</th>
-            <th>Price</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {enrolled?.length > 0 &&
-            enrolled?.map((course, index) => (
-              <SelectedCourseRow course={course} index={index} />
-            ))}
-        </tbody>
-      </Table>
-    </div>
-  );
-};
-
-const SelectedCourseRow = ({ course, index }) => {
-  const [enrolled, setEnrolled] = useState({});
-  useEffect(() => {
-    fetch(`http://localhost:5000/courses/${course.courseId}`)
-      .then((res) => res.json())
-      .then((data) => setEnrolled(data));
-  }, []);
-  const { courseName, instructorName, instructorEmail, price } = enrolled || {};
   return (
     <>
       <tr>
@@ -81,7 +80,7 @@ const SelectedCourseRow = ({ course, index }) => {
         <td>{instructorEmail}</td>
         <td>${price}</td>
         <td>
-          <Link to={`/dashboard/payment/${course?._id}`}>
+          <Link to={`/dashboard/payment/${course?.courseId}`}>
             <Button className="me-1 my-1" variant="primary">
               <FaWallet /> Pay
             </Button>

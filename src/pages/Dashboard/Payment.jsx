@@ -1,6 +1,5 @@
 import { Elements } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
-import useEnrolled from "../../hooks/useEnrolled";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { useParams } from "react-router-dom";
@@ -10,11 +9,11 @@ const stripePromise = loadStripe(
 );
 const Payment = () => {
   const [course, setCourse] = useState({});
-  const [enrolled] = useEnrolled();
   const { id } = useParams();
   useEffect(() => {
-    const exactCourse = enrolled.find((c) => c._id === id);
-    setCourse(exactCourse);
+    fetch(`http://localhost:5000/courses/${id}`)
+      .then((res) => res.json())
+      .then((data) => setCourse(data));
   }, [id]);
 
   return (
