@@ -12,7 +12,7 @@ const CourseCard = ({ course }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/allAdminOrInstructor")
+    fetch(`${import.meta.env.VITE_URL}/allAdminOrInstructor`)
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);
@@ -45,7 +45,7 @@ const CourseCard = ({ course }) => {
           courseId: _id,
         };
         // creating enrolled courses
-        fetch("http://localhost:5000/enrolled", {
+        fetch(`${import.meta.env.VITE_URL}/enrolled`, {
           method: "POST",
           headers: {
             "content-type": "application/json",

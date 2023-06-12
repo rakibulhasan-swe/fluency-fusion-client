@@ -36,7 +36,7 @@ const router = createBrowserRouter([
       {
         path: "/courses",
         element: <AllCourse />,
-        loader: () => fetch("http://localhost:5000/approvedCourses"),
+        loader: () => fetch(`${import.meta.env.VITE_URL}/approvedCourses`),
       },
       {
         path: "/login",

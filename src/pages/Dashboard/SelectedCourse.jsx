@@ -38,7 +38,7 @@ const SelectedCourseRow = ({ course, index }) => {
   const [, refetch] = useEnrolled();
   const [enrolled, setEnrolled] = useState({});
   useEffect(() => {
-    fetch(`http://localhost:5000/courses/${course.courseId}`)
+    fetch(`${import.meta.env.VITE_URL}/courses/${course.courseId}`)
       .then((res) => res.json())
       .then((data) => setEnrolled(data));
   }, []);
@@ -53,7 +53,7 @@ const SelectedCourseRow = ({ course, index }) => {
     }).then((willDelete) => {
       if (willDelete) {
         console.log(id);
-        fetch(`http://localhost:5000/enrolled/${id}`, {
+        fetch(`${import.meta.env.VITE_URL}/enrolled/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

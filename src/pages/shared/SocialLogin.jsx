@@ -23,7 +23,7 @@ const SocialLogin = () => {
           image: goggleUser?.photoURL,
           role: "student",
         };
-        fetch("http://localhost:5000/users", {
+        fetch(`${import.meta.env.VITE_URL}/users`, {
           method: "POST",
           headers: {
             "content-type": "application/json",

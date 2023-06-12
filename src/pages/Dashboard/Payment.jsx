@@ -11,7 +11,7 @@ const Payment = () => {
   const [course, setCourse] = useState({});
   const { id } = useParams();
   useEffect(() => {
-    fetch(`http://localhost:5000/courses/${id}`)
+    fetch(`${import.meta.env.VITE_URL}/courses/${id}`)
       .then((res) => res.json())
       .then((data) => setCourse(data));
   }, [id]);

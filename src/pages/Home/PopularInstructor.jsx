@@ -5,7 +5,7 @@ import InstructorCard from "../../Components/InstructorCard";
 const PopularInstructor = () => {
   const [instructors, setInstructors] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/popularInstructor")
+    fetch(`${import.meta.env.VITE_URL}/popularInstructor`)
       .then((res) => res.json())
       .then((data) => setInstructors(data))
       .catch((err) => console.log(err));

@@ -8,7 +8,7 @@ const useManageCourse = () => {
   } = useQuery({
     queryKey: ["courses"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/courses");
+      const res = await fetch(`${import.meta.env.VITE_URL}/courses`);
       return res.json();
     },
   });

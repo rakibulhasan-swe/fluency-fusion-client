@@ -37,7 +37,7 @@ const PurchasedCourseRow = ({ course, index }) => {
   const [, refetch] = usePurchased();
   const [enrolled, setEnrolled] = useState({});
   useEffect(() => {
-    fetch(`http://localhost:5000/courses/${course.purchasedId}`)
+    fetch(`${import.meta.env.VITE_URL}/courses/${course.purchasedId}`)
       .then((res) => res.json())
       .then((data) => setEnrolled(data));
   }, []);

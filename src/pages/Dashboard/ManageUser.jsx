@@ -22,7 +22,7 @@ const ManageUser = () => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        fetch(`http://localhost:5000/users/${id}`, {
+        fetch(`${import.meta.env.VITE_URL}/users/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -43,7 +43,7 @@ const ManageUser = () => {
   };
   // make admin
   const handleMakeAdmin = (id) => {
-    fetch(`http://localhost:5000/users/admin/${id}`, {
+    fetch(`${import.meta.env.VITE_URL}/users/admin/${id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
@@ -64,7 +64,7 @@ const ManageUser = () => {
   };
   // make handleMakeInstructtor
   const handleMakeInstructor = (id) => {
-    fetch(`http://localhost:5000/users/instructor/${id}`, {
+    fetch(`${import.meta.env.VITE_URL}/users/instructor/${id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())

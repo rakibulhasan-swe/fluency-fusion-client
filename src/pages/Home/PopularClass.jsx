@@ -5,7 +5,7 @@ import CourseCard from "../../Components/CourseCard";
 const PopularClass = () => {
   const [courses, setCourses] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/popularCourses")
+    fetch(`${import.meta.env.VITE_URL}/popularCourses`)
       .then((res) => res.json())
       .then((data) => setCourses(data))
       .catch((err) => console.log(err));

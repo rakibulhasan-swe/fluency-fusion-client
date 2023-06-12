@@ -11,7 +11,7 @@ const ManageCourse = () => {
 
   // handle approve
   const handleApprove = (id) => {
-    fetch(`http://localhost:5000/courses/approve/${id}`, {
+    fetch(`${import.meta.env.VITE_URL}/courses/approve/${id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
@@ -32,7 +32,7 @@ const ManageCourse = () => {
   };
   // handle Denied
   const handleDenied = (id) => {
-    fetch(`http://localhost:5000/courses/denied/${id}`, {
+    fetch(`${import.meta.env.VITE_URL}/courses/denied/${id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
