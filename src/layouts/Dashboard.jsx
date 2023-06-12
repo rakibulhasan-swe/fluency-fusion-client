@@ -160,7 +160,7 @@ const Dashboard = () => {
                       </li>
                       <li className="nav-item py-1">
                         <NavLink
-                          to={"/dashboard/enrolledClass"}
+                          to={"/dashboard/purchasedCourse"}
                           className={({ isActive }) =>
                             isActive ? "active nav-link" : "nav-link text-dark"
                           }

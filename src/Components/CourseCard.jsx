@@ -15,7 +15,7 @@ const CourseCard = ({ course }) => {
   const {
     courseName,
     instructorName,
-    instructorEmail,
+    enrolledStudents,
     availableSeats,
     price,
     image,
@@ -73,7 +73,7 @@ const CourseCard = ({ course }) => {
             </div>
             <hr />
             <div className="d-flex justify-content-between align-items-center">
-              <Card.Text></Card.Text>
+              <Card.Text>Enrolled: {enrolledStudents}</Card.Text>
               <Button
                 className="btn-primary"
                 disabled={

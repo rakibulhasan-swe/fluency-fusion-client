@@ -54,14 +54,14 @@ const NavigationBar = () => {
                 Instructors
               </NavLink>
               <NavLink
-                to={"/classes"}
+                to={"/courses"}
                 className={({ isActive }) =>
                   isActive
                     ? "active nav-link fw-bold px-3"
                     : "nav-link text-dark px-3"
                 }
               >
-                Classes
+                Courses
               </NavLink>
               {user && (
                 <NavLink

@@ -16,6 +16,8 @@ import AdminRoute from "./AdminRoute";
 import InstructorRoute from "./InstructorRoute";
 import SelectedCourse from "../pages/Dashboard/SelectedCourse";
 import Payment from "../pages/Dashboard/Payment";
+import PaymentHistory from "../pages/Dashboard/PaymentHistory";
+import PurchasedCourse from "../pages/Dashboard/PurchasedCourse";
 
 const router = createBrowserRouter([
   {
@@ -32,7 +34,7 @@ const router = createBrowserRouter([
         element: <Instructor />,
       },
       {
-        path: "/classes",
+        path: "/courses",
         element: <AllCourse />,
         loader: () => fetch("http://localhost:5000/courses"),
       },
@@ -89,6 +91,14 @@ const router = createBrowserRouter([
       {
         path: "selectedCourses",
         element: <SelectedCourse />,
+      },
+      {
+        path: "purchasedCourse",
+        element: <PurchasedCourse />,
+      },
+      {
+        path: "paymentHistory",
+        element: <PaymentHistory />,
       },
       {
         path: "payment/:id",
