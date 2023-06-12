@@ -1,14 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useContext } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Button, Table } from "react-bootstrap";
 import { FaTrash } from "react-icons/fa";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const PaymentHistory = () => {
+  const { user } = useContext(AuthContext);
   // getting user data
   const [axiosSecure] = useAxiosSecure();
   const { data: payments = [], refetch } = useQuery(["payments"], async () => {
-    const res = await axiosSecure.get("/payments");
+    const res = await axiosSecure.get(`/payments?email=${user?.email}`);
     return res.data;
   });
   return (
@@ -19,11 +21,8 @@ const PaymentHistory = () => {
           <tr>
             <th>#</th>
             <th>Name</th>
-            <th>Email</th>
-            <th>Course Name</th>
-            <th>Instructor Name</th>
+            <th>Date</th>
             <th>Transaction Id</th>
-            <th>Price</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -32,17 +31,11 @@ const PaymentHistory = () => {
             payments?.map((details, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{details?.userName}</td>
-                <td>{details?.email}</td>
-                <td>{details?.courseName}</td>
-                <td>{details?.instructorName}</td>
+                <td>{user?.displayName}</td>
+                <td>{details?.date}</td>
                 <td>{details?.transactionId}</td>
-                <td>{details?.price}</td>
                 <td>
-                  <Button
-                    variant="danger"
-                    onClick={() => handleDelete(details?._id)}
-                  >
+                  <Button variant="danger">
                     <FaTrash />
                   </Button>
                 </td>
