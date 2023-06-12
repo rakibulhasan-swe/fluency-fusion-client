@@ -16,7 +16,7 @@ const CourseCard = ({ course }) => {
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);
-        if (data.length > 0 && user.email) {
+        if (data.length > 0 && user?.email) {
           const current = data?.find(
             (singleUser) => singleUser.email === user?.email
           );
@@ -26,8 +26,6 @@ const CourseCard = ({ course }) => {
         }
       });
   }, [user]);
-
-  console.log(currentRole);
   const {
     courseName,
     instructorName,
