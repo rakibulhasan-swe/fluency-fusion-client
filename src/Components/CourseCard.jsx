@@ -84,7 +84,7 @@ const CourseCard = ({ course }) => {
             availableSeats ? "border-0 shadow" : "border-0 shadow bg-danger"
           }
         >
-          <Card.Img variant="top" src={image} />
+          <Card.Img variant="top" src={image} style={{maxHeight: "17rem"}} />
           <Card.Body className="p-4">
             <Card.Title className="fw-semibold">{courseName}</Card.Title>
             <Card.Text className="fw-light">
