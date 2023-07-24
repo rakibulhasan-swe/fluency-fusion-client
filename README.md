@@ -1,4 +1,4 @@
-# Fluency Fusion - A online based Foreign Language Management System
+# Fluency Fusion - An online based Foreign Language Management System
 
 ### This website includes
 * User can see course and can enroll when they logged in.
