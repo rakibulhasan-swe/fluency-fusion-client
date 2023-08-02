@@ -1,4 +1,4 @@
-# Fluency Fusion - An online based Foreign Education platform
+# Fluency Fusion - An online based Education platform
 
 ### This website includes
 * Users can see the course and can enroll when they logged in.
